@@ -9,6 +9,7 @@ class Todo {
 
     this.addItem();
     this.deleteItem();
+    this.allItemsDelete();
   }
 
   addItem() {
@@ -28,6 +29,18 @@ class Todo {
       let target = event.target;
       if(target.closest('.todo__item-btn--delete')) {
         target.closest('.todo__item').remove();
+      }
+    })
+  }
+
+  allItemsDelete() {
+    this.el.addEventListener('click', event => {
+      let target = event.target;
+      if(target.closest('.todo__btn-trash')) {
+        let items = this.el.querySelectorAll('.todo__item');
+        items.forEach(item => {
+          item.remove();
+        });
       }
     })
   }

@@ -226,7 +226,7 @@ input {
   z-index: 1;
 }
 
-.todo__item-not-done {
+.todo__item-undone {
   text-decoration: line-through;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -234,7 +234,7 @@ input {
           user-select: none;
 }
 
-.todo__item-not-done:before {
+.todo__item-undone:before {
   content: "";
   position: absolute;
   top: 0;

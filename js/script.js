@@ -11,6 +11,7 @@ class Todo {
     this.deleteItem();
     this.allItemsDelete();
     this.doneTask();
+    this.undoneTask();
   }
 
   addItem() {
@@ -39,6 +40,15 @@ class Todo {
       let target = event.target;
       if(target.closest('.todo__item-btn--done')) {
         target.closest('.todo__item').classList.add('todo__item-done');
+      }
+    })
+  }
+
+  undoneTask() {
+    this.el.addEventListener('click', event => {
+      let target = event.target;
+      if(target.closest('.todo__item-btn--undone')) {
+        target.closest('.todo__item').classList.add('todo__item-undone');
       }
     })
   }

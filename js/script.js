@@ -7,26 +7,57 @@ class Todo {
     this.plusItemBtn = this.el.querySelector('.todo__add-task');
     this.itemsList = this.el.querySelector('.todo__list');
 
-    this.addItem();
-    this.deleteItem();
-    this.allItemsDelete();
+    this.addTask();
+    this.allTasksDelete();
+    this.deleteTask();
     this.doneTask();
     this.undoneTask();
   }
 
-  addItem() {
+  addTask() {
     this.el.addEventListener('click', event => {
       let target = event.target;
       if(target.closest('.todo__add-task')) {
         if(this.input.value !== '') {
-          this.createItem(this.input.value);
+          this.createTask(this.input.value);
           this.input.value = '';
         }
       }
     })
   }
 
-  deleteItem() {
+  createTask(value) {
+    let wrap = document.createElement('div');
+    wrap.classList.add('todo__item');
+    this.itemsList.appendChild(wrap);
+
+    this.itemText = document.createElement('p');
+    this.itemText.classList.add('todo__item-text');
+    this.itemText.innerHTML = value;
+    wrap.appendChild(this.itemText);
+
+    let btnsWrap = document.createElement('div');
+    btnsWrap.classList.add('todo__item-btns');
+    wrap.appendChild(btnsWrap);
+
+    let btnsObject = {
+      'check': '--done',
+      'remove': '--undone',
+      'minus': '--delete',
+    }
+
+    for(let item in btnsObject) {
+      let btn = document.createElement('button');
+      btn.classList.add('todo__item-btn', `todo__item-btn${btnsObject[item]}`);
+      btnsWrap.appendChild(btn);
+
+      let icon = document.createElement('i');
+      icon.classList.add('fa', `fa-${item}`);
+      btn.appendChild(icon);
+    }
+  }
+
+  deleteTask() {
     this.el.addEventListener('click', event => {
       let target = event.target;
       if(target.closest('.todo__item-btn--delete')) {
@@ -53,7 +84,7 @@ class Todo {
     })
   }
 
-  allItemsDelete() {
+  allTasksDelete() {
     this.el.addEventListener('click', event => {
       let target = event.target;
       if(target.closest('.todo__btn-trash')) {
@@ -63,37 +94,6 @@ class Todo {
         });
       }
     })
-  }
-
-  createItem(data) {
-    let wrap = document.createElement('div');
-    wrap.classList.add('todo__item');
-    this.itemsList.appendChild(wrap);
-
-    this.itemText = document.createElement('p');
-    this.itemText.classList.add('todo__item-text');
-    this.itemText.innerHTML = data;
-    wrap.appendChild(this.itemText);
-
-    let btnsWrap = document.createElement('div');
-    btnsWrap.classList.add('todo__item-btns');
-    wrap.appendChild(btnsWrap);
-
-    let btnsObject = {
-      'check': '--done',
-      'remove': '--undone',
-      'minus': '--delete',
-    }
-
-    for(let item in btnsObject) {
-      let btn = document.createElement('button');
-      btn.classList.add('todo__item-btn', `todo__item-btn${btnsObject[item]}`);
-      btnsWrap.appendChild(btn);
-
-      let icon = document.createElement('i');
-      icon.classList.add('fa', `fa-${item}`);
-      btn.appendChild(icon);
-    }
   }
 
 }

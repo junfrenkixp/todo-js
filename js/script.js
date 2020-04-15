@@ -7,10 +7,11 @@ class Todo {
     this.plusItemBtn = this.el.querySelector('.todo__add-task');
     this.itemsList = this.el.querySelector('.todo__list');
 
-    this.noneInput();
+    this.addItem();
+    this.deleteItem();
   }
 
-  noneInput() {
+  addItem() {
     this.el.addEventListener('click', event => {
       let target = event.target;
       if(target.closest('.todo__add-task')) {
@@ -18,6 +19,15 @@ class Todo {
           this.createItem(this.input.value);
           this.input.value = '';
         }
+      }
+    })
+  }
+
+  deleteItem() {
+    this.el.addEventListener('click', event => {
+      let target = event.target;
+      if(target.closest('.todo__item-btn--delete')) {
+        target.closest('.todo__item').remove();
       }
     })
   }
@@ -36,16 +46,21 @@ class Todo {
     btnsWrap.classList.add('todo__item-btns');
     wrap.appendChild(btnsWrap);
 
-    let btnsArr = ['check', 'remove', 'minus'];
-    btnsArr.forEach(item => {
+    let btnsObject = {
+      'check': '--done',
+      'remove': '--not-done',
+      'minus': '--delete',
+    }
+
+    for(let item in btnsObject) {
       let btn = document.createElement('button');
-      btn.classList.add('todo__item-btn');
+      btn.classList.add('todo__item-btn', `todo__item-btn${btnsObject[item]}`);
       btnsWrap.appendChild(btn);
 
       let icon = document.createElement('i');
       icon.classList.add('fa', `fa-${item}`);
       btn.appendChild(icon);
-    })
+    }
   }
 
 }

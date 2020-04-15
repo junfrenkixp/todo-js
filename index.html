@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+  
+  <div class="todo__wrap">
+    <div class="todo">
+      <div class="todo__inner">
+        <div class="todo__title-row">
+          <h1 class="todo__title">Todo List</h1>
+          <div class="todo__wrap-btns">
+            <button class="todo__btn-trash">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="todo__input-wrap">
+          <input class="todo__input" type="text" placeholder="Enter a task..">
+          <button class="todo__add-task">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="todo__list">
+        <div class="todo__item">
+          <p class="todo__item-text">
+            Lorem ipsum dolor sit amet consectetur
+          </p>
+          <div class="todo__item-btns">
+            <button class="todo__item-btn">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+            <button class="todo__item-btn">
+              <i class="fa fa-remove" aria-hidden="true"></i>
+            </button>
+            <!--<button class="todo__item-btn">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>-->
+            <button class="todo__item-btn">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

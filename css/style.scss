@@ -1,0 +1,204 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #EBECF0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #372F2F;
+}
+
+button,
+input {
+  background-color: inherit;
+  border: 0;
+  outline: none !important;
+}
+
+.todo {
+  width: 60%;
+  min-height: 200px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), #EBECF0;
+  background-blend-mode: soft-light, normal;
+  box-shadow: 20px 20px 40px #A6ABBD, -20px -20px 40px #FAFBFF;
+  border-radius: 40px;
+  overflow: hidden;
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+  }
+
+  &__inner {
+    padding: 30px 20px 20px;
+    border-bottom: 1px solid #A6ABBD;
+  }
+
+  &__title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 5px 0 10px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  &__btn-trash {
+    padding: 5px;
+    font-size: 22px;
+    line-height: 18px;
+    transition: .2s;
+    cursor: pointer;
+    color: #372F2F;
+    border-radius: 4px;
+
+    &:active {
+      background-color: lighten(rgba(166, 171, 189, 0.7), 10%);
+
+    }
+  }
+
+  &__input {
+    padding: 5px 50px 5px 10px;
+    width: 100%;
+    background: rgba(166, 171, 189, 0.3);
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 20px;
+
+    &:focus {
+      background: rgba(166, 171, 189, 0.5);
+    }
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    &-wrap {
+      display: flex;
+      position: relative;
+      margin-top: 15px;
+    }
+  }
+
+  &__add-task {
+    position: absolute;
+    right: 0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: rgba(166, 171, 189, 0.7);
+    border-radius: 6px;
+    height: 100%;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    color: #372F2F;
+
+    &:hover {
+      background: rgba(166, 171, 189, 1);
+    }
+
+    &:active {
+      background: linear-gradient(317.7deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 105.18%), #EBECF0;
+      box-shadow: inset 5px 5px 10px #A6ABBD, inset -5px -5px 10px #FAFBFF;
+    }
+  }
+
+  &__list {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: 36px;
+    padding: 20px 170px 20px 20px;
+    background: rgba(217, 222, 230, 0.4);
+    border-bottom: 1px solid rgba(166, 171, 189, 0.6);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background: rgba(217, 222, 230, 0.6);
+    }
+
+    &-text {
+      margin: 0;
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    &-btns {
+      display: flex;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      margin: 0 -5px;
+    }
+
+    &-btn {
+      height: 40px;
+      width: 40px;
+      padding: 0;
+      margin: 0 5px;
+      background: linear-gradient(135.37deg, rgba(0, 0, 0, 0.4) 4.29%, rgba(255, 255, 255, 0.4) 95.6%), #EBECF0;
+      background-blend-mode: soft-light, normal;
+      box-shadow: 5px 5px 10px #A6ABBD, -5px -5px 10px #FAFBFF;
+      border-radius: 40px;
+      color: #372F2F;
+      font-size: 20px;
+      line-height: 20px;
+      cursor: pointer;
+
+      &:active {
+        background: linear-gradient(317.7deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 105.18%), #EBECF0;
+        box-shadow: inset 5px 5px 10px #A6ABBD, inset -5px -5px 10px #FAFBFF;
+      }
+    }
+  }
+  
+  &__item-done {
+    text-decoration: line-through;
+    user-select: none;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color:#6DC175;
+      opacity: .8;
+      z-index: 1;
+    }
+  }
+  
+  &__item-not-done {
+    text-decoration: line-through;
+    user-select: none;
+    
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color:#BE4949;
+      opacity: .8;
+      z-index: 1;
+    }
+  }
+}

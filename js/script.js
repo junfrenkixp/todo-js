@@ -12,6 +12,7 @@ class Todo {
     this.deleteTask();
     this.doneTask();
     this.undoneTask();
+    this.correctTask();
   }
 
   addTask() {
@@ -36,6 +37,11 @@ class Todo {
     this.itemText.innerHTML = value;
     wrap.appendChild(this.itemText);
 
+    let correctInput = document.createElement('input');
+    correctInput.classList.add('todo__item-correct-input');
+    correctInput.type = 'text';
+    wrap.appendChild(correctInput);
+
     let btnsWrap = document.createElement('div');
     btnsWrap.classList.add('todo__item-btns');
     wrap.appendChild(btnsWrap);
@@ -43,6 +49,7 @@ class Todo {
     let btnsObject = {
       'check': '--done',
       'remove': '--undone',
+      'pencil': '--correct',
       'minus': '--delete',
     }
 
@@ -55,6 +62,27 @@ class Todo {
       icon.classList.add('fa', `fa-${item}`);
       btn.appendChild(icon);
     }
+  }
+
+  correctTask() {
+    this.el.addEventListener('click', event => {
+      let target = event.target;
+      if(target.closest('.todo__item-btn--correct')) {
+        let text = target.closest('.todo__item').querySelector('.todo__item-text');
+        let input = target.closest('.todo__item').querySelector('.todo__item-correct-input');
+
+        if(target.closest('.todo__item-correct')) {
+          text.innerHTML = input.value;
+          target.closest('.todo__item').classList.remove('todo__item-correct');
+        } else {
+          input.value = text.innerHTML.trim();
+          setTimeout(() => {
+            input.focus();
+          }, 100);
+          target.closest('.todo__item').classList.add('todo__item-correct');
+        }
+      }
+    })
   }
 
   deleteTask() {

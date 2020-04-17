@@ -2,4 +2,4 @@
 
 ---
 
-## [Link to todo](https://junfrenkixp.github.io/todo-js/)
+## [Link to todo(demo)](https://junfrenkixp.github.io/todo-js/)

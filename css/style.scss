@@ -49,10 +49,27 @@ input {
     line-height: 28px;
   }
 
-  &__btn-trash {
+  &__wrap-btns {
+    display: flex;
+    align-items: baseline;
+
+    & > button {
+      &:first-child {
+        margin-left: 0;
+      }
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__btn-trash,
+  &__btn-all,
+  &__btn-active,
+  &__btn-completed {
     padding: 5px;
-    font-size: 22px;
-    line-height: 18px;
+    margin: 0 5px;
     transition: .2s;
     cursor: pointer;
     color: #372F2F;
@@ -60,8 +77,19 @@ input {
 
     &:active {
       background-color: lighten(rgba(166, 171, 189, 0.7), 10%);
-
     }
+  }
+
+  &__btn-all,
+  &__btn-active,
+  &__btn-completed {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  &__btn-trash {
+    font-size: 22px;
+    line-height: 18px;
   }
 
   &__input {

@@ -3,8 +3,8 @@
 class Todo {
   constructor(el) {
     this.el = el;
+    
     this.input = this.el.querySelector('.todo__input');
-    this.plusItemBtn = this.el.querySelector('.todo__add-task');
     this.itemsList = this.el.querySelector('.todo__list');
 
     this.addTask();
@@ -13,29 +13,42 @@ class Todo {
     this.doneTask();
     this.undoneTask();
     this.correctTask();
+
+
   }
 
   addTask() {
-    this.el.addEventListener('click', event => {
-      let target = event.target;
-      if(target.closest('.todo__add-task')) {
-        if(this.input.value !== '') {
-          this.createTask(this.input.value);
-          this.input.value = '';
+    this.el.addEventListener('keyup', event => {
+      if (event.target.closest('.todo__input')) {
+        if (event.code === 'Enter' && event.key === 'Enter') {
+          this.createTask();
         }
+      }
+    })
+
+    this.el.addEventListener('click', event => {
+      if (event.target.closest('.todo__add-task')) {
+        this.createTask();
       }
     })
   }
 
-  createTask(value) {
+  createTask() {
+    if (this.input.value !== '') {
+      this.renderTask(this.input.value);
+      this.input.value = '';
+    }
+  }
+
+  renderTask(value) {
     let wrap = document.createElement('div');
     wrap.classList.add('todo__item');
     this.itemsList.appendChild(wrap);
 
-    this.itemText = document.createElement('p');
-    this.itemText.classList.add('todo__item-text');
-    this.itemText.innerHTML = value;
-    wrap.appendChild(this.itemText);
+    let itemText = document.createElement('p');
+    itemText.classList.add('todo__item-text');
+    itemText.innerHTML = value;
+    wrap.appendChild(itemText);
 
     let correctInput = document.createElement('input');
     correctInput.classList.add('todo__item-correct-input');
@@ -53,7 +66,7 @@ class Todo {
       'minus': '--delete',
     }
 
-    for(let item in btnsObject) {
+    for (let item in btnsObject) {
       let btn = document.createElement('button');
       btn.classList.add('todo__item-btn', `todo__item-btn${btnsObject[item]}`);
       btnsWrap.appendChild(btn);
@@ -67,11 +80,11 @@ class Todo {
   correctTask() {
     this.el.addEventListener('click', event => {
       let target = event.target;
-      if(target.closest('.todo__item-btn--correct')) {
+      if (target.closest('.todo__item-btn--correct')) {
         let text = target.closest('.todo__item').querySelector('.todo__item-text');
         let input = target.closest('.todo__item').querySelector('.todo__item-correct-input');
 
-        if(target.closest('.todo__item-correct')) {
+        if (target.closest('.todo__item-correct')) {
           text.innerHTML = input.value;
           target.closest('.todo__item').classList.remove('todo__item-correct');
         } else {
@@ -88,7 +101,7 @@ class Todo {
   deleteTask() {
     this.el.addEventListener('click', event => {
       let target = event.target;
-      if(target.closest('.todo__item-btn--delete')) {
+      if (target.closest('.todo__item-btn--delete')) {
         target.closest('.todo__item').remove();
       }
     })
@@ -97,7 +110,7 @@ class Todo {
   doneTask() {
     this.el.addEventListener('click', event => {
       let target = event.target;
-      if(target.closest('.todo__item-btn--done')) {
+      if (target.closest('.todo__item-btn--done')) {
         target.closest('.todo__item').classList.add('todo__item-done');
       }
     })
@@ -106,7 +119,7 @@ class Todo {
   undoneTask() {
     this.el.addEventListener('click', event => {
       let target = event.target;
-      if(target.closest('.todo__item-btn--undone')) {
+      if (target.closest('.todo__item-btn--undone')) {
         target.closest('.todo__item').classList.add('todo__item-undone');
       }
     })
@@ -115,7 +128,7 @@ class Todo {
   allTasksDelete() {
     this.el.addEventListener('click', event => {
       let target = event.target;
-      if(target.closest('.todo__btn-trash')) {
+      if (target.closest('.todo__btn-trash')) {
         let items = this.el.querySelectorAll('.todo__item');
         items.forEach(item => {
           item.remove();

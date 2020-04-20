@@ -64,10 +64,26 @@ input {
   line-height: 28px;
 }
 
-.todo__btn-trash {
+.todo__wrap-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.todo__wrap-btns > button:first-child {
+  margin-left: 0;
+}
+
+.todo__wrap-btns > button:last-child {
+  margin-right: 0;
+}
+
+.todo__btn-trash, .todo__btn-all, .todo__btn-active, .todo__btn-completed {
   padding: 5px;
-  font-size: 22px;
-  line-height: 18px;
+  margin: 0 5px;
   -webkit-transition: .2s;
   transition: .2s;
   cursor: pointer;
@@ -75,8 +91,18 @@ input {
   border-radius: 4px;
 }
 
-.todo__btn-trash:active {
+.todo__btn-trash:active, .todo__btn-all:active, .todo__btn-active:active, .todo__btn-completed:active {
   background-color: rgba(195, 199, 211, 0.7);
+}
+
+.todo__btn-all, .todo__btn-active, .todo__btn-completed {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.todo__btn-trash {
+  font-size: 22px;
+  line-height: 18px;
 }
 
 .todo__input {

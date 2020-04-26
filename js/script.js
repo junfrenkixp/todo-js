@@ -3,18 +3,39 @@
 class Todo {
   constructor(el) {
     this.el = el;
-    
+
     this.input = this.el.querySelector('.todo__input');
     this.itemsList = this.el.querySelector('.todo__list');
 
+    this.taskItemInfo = [
+      {
+        state: 'active',
+        taskText: 'Lorem ipsum dolor sit amet consectetur',
+      },
+      {
+        state: 'done',
+        taskText: 'Lorem ipsum dolor sit amet consectetur',
+      },
+      {
+        state: 'undone',
+        taskText: 'Lorem ipsum dolor sit amet consectetur',
+      }
+    ];
+
+    this.init();
+  }
+
+  init() {
     this.addTask();
-    this.allTasksDelete();
-    this.deleteTask();
-    this.doneTask();
-    this.undoneTask();
-    this.correctTask();
 
-
+    this.el.addEventListener('click', event => {
+      this.correctTask(event);
+      this.deleteTask(event);
+      this.doneTask(event);
+      this.undoneTask(event);
+      this.allTasksDelete(event);
+      this.activeTasks(event);
+    })
   }
 
   addTask() {
@@ -35,108 +56,108 @@ class Todo {
 
   createTask() {
     if (this.input.value !== '') {
-      this.renderTask(this.input.value);
+      this.taskItemInfo.forEach(item => {
+        item.taskText = this.input.value;
+        console.log(item.state, item.taskText);
+      })
       this.input.value = '';
+      this.renderTask();
     }
   }
 
-  renderTask(value) {
+  renderTask(state) {
     let wrap = document.createElement('div');
     wrap.classList.add('todo__item');
-    this.itemsList.appendChild(wrap);
+    wrap.dataset.state = state;
+    this.itemsList.prepend(wrap);
 
     let itemText = document.createElement('p');
     itemText.classList.add('todo__item-text');
     itemText.innerHTML = value;
-    wrap.appendChild(itemText);
+    wrap.append(itemText);
 
     let correctInput = document.createElement('input');
     correctInput.classList.add('todo__item-correct-input');
     correctInput.type = 'text';
-    wrap.appendChild(correctInput);
+    wrap.append(correctInput);
 
     let btnsWrap = document.createElement('div');
     btnsWrap.classList.add('todo__item-btns');
-    wrap.appendChild(btnsWrap);
+    wrap.append(btnsWrap);
 
     let btnsObject = {
-      'check': '--done',
-      'remove': '--undone',
-      'pencil': '--correct',
-      'minus': '--delete',
+      check: '--done',
+      remove: '--undone',
+      pencil: '--correct',
+      minus: '--delete',
     }
 
     for (let item in btnsObject) {
       let btn = document.createElement('button');
       btn.classList.add('todo__item-btn', `todo__item-btn${btnsObject[item]}`);
-      btnsWrap.appendChild(btn);
+      btnsWrap.append(btn);
 
       let icon = document.createElement('i');
       icon.classList.add('fa', `fa-${item}`);
-      btn.appendChild(icon);
+      btn.append(icon);
     }
   }
 
-  correctTask() {
-    this.el.addEventListener('click', event => {
-      let target = event.target;
-      if (target.closest('.todo__item-btn--correct')) {
-        let text = target.closest('.todo__item').querySelector('.todo__item-text');
-        let input = target.closest('.todo__item').querySelector('.todo__item-correct-input');
+  correctTask(event) {
+    let target = event.target;
+    if (target.closest('.todo__item-btn--correct')) {
+      let text = target.closest('.todo__item').querySelector('.todo__item-text');
+      let input = target.closest('.todo__item').querySelector('.todo__item-correct-input');
 
-        if (target.closest('.todo__item-correct')) {
-          text.innerHTML = input.value;
-          target.closest('.todo__item').classList.remove('todo__item-correct');
-        } else {
-          input.value = text.innerHTML.trim();
-          setTimeout(() => {
-            input.focus();
-          }, 100);
-          target.closest('.todo__item').classList.add('todo__item-correct');
-        }
+      if (target.closest('.todo__item-correct')) {
+        text.innerHTML = input.value;
+        target.closest('.todo__item').classList.remove('todo__item-correct');
+      } else {
+        input.value = text.innerHTML.trim();
+        setTimeout(() => {
+          input.focus();
+        }, 100);
+        target.closest('.todo__item').classList.add('todo__item-correct');
       }
-    })
+    }
   }
 
-  deleteTask() {
-    this.el.addEventListener('click', event => {
-      let target = event.target;
-      if (target.closest('.todo__item-btn--delete')) {
-        target.closest('.todo__item').remove();
-      }
-    })
+  deleteTask(event) {
+    if (event.target.closest('.todo__item-btn--delete')) {
+      event.target.closest('.todo__item').remove();
+    }
   }
 
-  doneTask() {
-    this.el.addEventListener('click', event => {
-      let target = event.target;
-      if (target.closest('.todo__item-btn--done')) {
-        target.closest('.todo__item').classList.add('todo__item-done');
-      }
-    })
+  doneTask(event) {
+    if (event.target.closest('.todo__item-btn--done')) {
+      event.target.closest('.todo__item').classList.add('todo__item-done');
+      event.target.closest('.todo__item').dataset.state = 'done';
+    }
   }
 
-  undoneTask() {
-    this.el.addEventListener('click', event => {
-      let target = event.target;
-      if (target.closest('.todo__item-btn--undone')) {
-        target.closest('.todo__item').classList.add('todo__item-undone');
-      }
-    })
+  undoneTask(event) {
+    if (event.target.closest('.todo__item-btn--undone')) {
+      event.target.closest('.todo__item').classList.add('todo__item-undone');
+      event.target.closest('.todo__item').dataset.state = 'undone';
+    }
   }
 
-  allTasksDelete() {
-    this.el.addEventListener('click', event => {
-      let target = event.target;
-      if (target.closest('.todo__btn-trash')) {
-        let items = this.el.querySelectorAll('.todo__item');
-        items.forEach(item => {
-          item.remove();
-        });
-      }
-    })
+  allTasksDelete(event) {
+    if (event.target.closest('.todo__btn-trash')) {
+      let items = this.el.querySelectorAll('.todo__item');
+      items.forEach(item => {
+        item.remove();
+      });
+    }
   }
 
+  activeTasks(event) {
+    if (event.target.closest('.todo__btn-active')) {
+      let items = this.el.querySelectorAll('.todo__item');
+      items.forEach(item => {
+      });
+    }
+  }
 }
 
 const elem = document.querySelector('.todo');

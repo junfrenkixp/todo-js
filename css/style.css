@@ -70,10 +70,26 @@ input {
   margin: 0 5px 0 10px;
 }
 
+@media (max-width: 600px) {
+  .todo__title-row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 0;
+  }
+}
+
 .todo__title {
   margin: 0;
   font-size: 24px;
   line-height: 28px;
+}
+
+@media (max-width: 600px) {
+  .todo__title {
+    margin-bottom: 10px;
+  }
 }
 
 .todo__wrap-btns {
@@ -125,6 +141,12 @@ input {
   font-size: 18px;
   line-height: 20px;
   color: #372F2F;
+}
+
+@media (max-width: 600px) {
+  .todo__input {
+    padding: 10px 50px 10px 10px;
+  }
 }
 
 .todo__input:focus {
@@ -199,6 +221,19 @@ input {
   border-bottom: 1px solid rgba(166, 171, 189, 0.6);
 }
 
+@media (max-width: 600px) {
+  .todo__item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+    padding: 20px 10px;
+  }
+}
+
 .todo__item:last-child {
   border-bottom: 0;
 }
@@ -211,6 +246,14 @@ input {
   margin: 0;
   font-size: 20px;
   line-height: 24px;
+}
+
+@media (max-width: 600px) {
+  .todo__item-text {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
 }
 
 .todo__item-correct-input {
@@ -230,6 +273,15 @@ input {
   transition: .2s;
 }
 
+@media (max-width: 600px) {
+  .todo__item-correct-input {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    width: auto;
+  }
+}
+
 .todo__item-btns {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -238,6 +290,16 @@ input {
   top: 20px;
   right: 20px;
   margin: 0 -5px;
+}
+
+@media (max-width: 600px) {
+  .todo__item-btns {
+    position: static;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    margin-bottom: 15px;
+  }
 }
 
 .todo__item-btn {
@@ -260,6 +322,12 @@ input {
   background: linear-gradient(317.7deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 105.18%), #EBECF0;
   -webkit-box-shadow: inset 5px 5px 10px #A6ABBD, inset -5px -5px 10px #FAFBFF;
           box-shadow: inset 5px 5px 10px #A6ABBD, inset -5px -5px 10px #FAFBFF;
+}
+
+@media (max-width: 600px) {
+  .todo__item-btn {
+    margin: 0 8px;
+  }
 }
 
 .todo__item-btn--correct {

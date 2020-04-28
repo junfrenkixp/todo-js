@@ -49,12 +49,21 @@ input {
     justify-content: space-between;
     align-items: center;
     margin: 0 5px 0 10px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      margin: 0;
+    }
   }
 
   &__title {
     margin: 0;
     font-size: 24px;
     line-height: 28px;
+
+    @media (max-width: 600px) {
+      margin-bottom: 10px;
+    }
   }
 
   &__wrap-btns {
@@ -109,6 +118,10 @@ input {
     line-height: 20px;
     color: #372F2F;
 
+    @media (max-width: 600px) {
+      padding: 10px 50px 10px 10px;
+    }
+
     &:focus {
       background: rgba(166, 171, 189, 0.5);
     }
@@ -162,6 +175,12 @@ input {
     background: rgba(217, 222, 230, 0.4);
     border-bottom: 1px solid rgba(166, 171, 189, 0.6);
 
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: start;
+      padding: 20px 10px;
+    }
+
     &:last-child {
       border-bottom: 0;
     }
@@ -174,6 +193,10 @@ input {
       margin: 0;
       font-size: 20px;
       line-height: 24px;
+
+      @media (max-width: 600px) {
+        order: 2;
+      }
     }
 
     &-correct-input {
@@ -189,6 +212,11 @@ input {
       line-height: 24px;
       z-index: 2;
       transition: .2s;
+
+      @media (max-width: 600px) {
+        order: 2;
+        width: auto;
+      }
     }
 
     &-btns {
@@ -197,6 +225,12 @@ input {
       top: 20px;
       right: 20px;
       margin: 0 -5px;
+
+      @media (max-width: 600px) {
+        position: static;
+        order: 1;
+        margin-bottom: 15px;
+      }
     }
 
     &-btn {
@@ -216,6 +250,10 @@ input {
       &:active {
         background: linear-gradient(317.7deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 105.18%), #EBECF0;
         box-shadow: inset 5px 5px 10px #A6ABBD, inset -5px -5px 10px #FAFBFF;
+      }
+      
+      @media (max-width: 600px) {
+        margin: 0 8px;
       }
     }
 

@@ -26,6 +26,18 @@ input {
   overflow: hidden;
 }
 
+@media (max-width: 980px) {
+  .todo {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .todo {
+    width: 90%;
+  }
+}
+
 .todo__wrap {
   display: -webkit-box;
   display: -ms-flexbox;

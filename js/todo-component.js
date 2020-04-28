@@ -10,8 +10,13 @@ class Todo {
     this.dbTasks = [
       {
         id: 1,
+        state: 'done',
+        taskText: 'Create Todo on pure JS'
+      },
+      {
+        id: 2,
         state: 'active',
-        taskText: '111'
+        taskText: 'Make Todo perfect'
       }
     ];
 
@@ -28,6 +33,9 @@ class Todo {
       this.doneTask(event);
       this.undoneTask(event);
       this.allTasksDelete(event);
+      this.filterCompleted(event);
+      this.filterActive(event);
+      this.filterAll(event);
     })
   }
 
@@ -71,7 +79,6 @@ class Todo {
       state: 'active',
       taskText: this.getTaskText(),
     })
-    console.log(this.dbTasks);
     return this.dbTasks;
   }
 
@@ -153,7 +160,6 @@ class Todo {
         task.state = state;
       }
     })
-    console.log(this.dbTasks);
   }
 
   doneTask(event) {
@@ -185,6 +191,35 @@ class Todo {
       this.dbTasks.forEach(task => {
         task.deleted = true;
       })
+    }
+  }
+
+  filter(state) {
+    if (state === 'done') {
+      let completedTasks = this.dbTasks.filter(task => task.state === 'done');
+      this.renderTask(completedTasks);
+    }
+    if (state === 'active') {
+      let completedTasks = this.dbTasks.filter(task => task.state === 'active');
+      this.renderTask(completedTasks);
+    }
+  }
+
+  filterCompleted(event) {
+    if (event.target.closest('.todo__btn-completed')) {
+      this.filter('done');
+    }
+  }
+
+  filterActive(event) {
+    if (event.target.closest('.todo__btn-active')) {
+      this.filter('active');
+    }
+  }
+
+  filterAll(event) {
+    if (event.target.closest('.todo__btn-all')) {
+      this.renderTask(this.dbTasks);
     }
   }
 }

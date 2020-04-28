@@ -23,6 +23,14 @@ input {
   border-radius: 40px;
   overflow: hidden;
 
+  @media (max-width: 980px) {
+    width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
+  }
+
   &__wrap {
     display: flex;
     align-items: center;
